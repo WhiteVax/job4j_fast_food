@@ -1,17 +1,16 @@
 package ru.job4j.order.repository;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import ru.job4j.domain.model.Order;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
-public interface OrderRepository {
-    void saveOrder(Order order);
-
+public interface OrderRepository extends CrudRepository<Order, Integer> {
     List<Order> findAll();
-
-    Order findById(int id);
-
-    void deleteById(int id);
-
-    void updateOrder(Order order);
+    @Modifying
+    @Query("UPDATE Order o set o.status = :status, o.description = :description WHERE o.id = :id")
+    void update(String status, String description, int id);
 }

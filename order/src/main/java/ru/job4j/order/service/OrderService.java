@@ -3,15 +3,14 @@ package ru.job4j.order.service;
 import ru.job4j.domain.model.Order;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
     void saveOrder(Order order);
 
     List<Order> findAll();
 
-    Order findById(int id);
-
-    void deleteById(int id);
-
-    void updateOrder(Order order);
+    Optional<Order> findById(int id);
+    boolean deleteById(int id);
+    boolean updateOrder(Order order);
 }

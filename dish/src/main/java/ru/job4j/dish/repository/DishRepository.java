@@ -11,7 +11,6 @@ public interface DishRepository extends CrudRepository<Dish, Integer> {
         List<Dish> findByName(String name);
         void deleteById(int id);
         List<Dish> findAll();
-
         @Modifying
         @Query("UPDATE Dish d set d.name = :name,  d.composition = :composition, d.price = :price WHERE d.id = :id")
         void update(String name, String composition, double price, int id);
